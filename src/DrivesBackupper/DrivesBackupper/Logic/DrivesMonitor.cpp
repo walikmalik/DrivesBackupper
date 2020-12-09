@@ -1,9 +1,6 @@
 #include "DrivesMonitor.h"
 #include "Backupper.h"
 
-#define DEBUG
-
-
 DrivesMonitor::DrivesMonitor()
 {
 	this->existingDrives = "";
@@ -90,8 +87,6 @@ TCHAR DrivesMonitor::returnLackElement()
 void DrivesMonitor::runBackupper(TCHAR driveMark)
 {
 	shared_ptr<Backupper> currentPtr = shared_ptr<Backupper>(new Backupper());
-//	backupperInstances.push_back(currentPtr);
-//	backupperThreads.push_back(thread(&Backupper::execute, ref(*currentPtr), driveMark));
 
 	backupperInstances.insert(pair<TCHAR, shared_ptr<Backupper>>(driveMark, currentPtr));
 	backupperThreads.insert(pair<TCHAR, thread>(driveMark, thread(&Backupper::execute, ref(*currentPtr), driveMark)));

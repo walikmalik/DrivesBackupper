@@ -1,14 +1,19 @@
 #pragma once
 
+#define DEBUG
+
 #include "Backupper.h"
 
-#include <iostream>
 #include <windows.h>
 #include <string>
 #include <vector>
 #include <map>
 #include <thread>
 #include <memory>
+
+#ifdef DEBUG
+#include <iostream>
+#endif // DEBUG
 
 
 #define BUFSIZE 512
@@ -18,9 +23,6 @@ using namespace std;
 class DrivesMonitor
 {
 private:
-	//vector <shared_ptr<Backupper>> backupperInstances;
-	//vector <thread> backupperThreads;
-
 	map <TCHAR, shared_ptr<Backupper>> backupperInstances;
 	map <TCHAR, thread> backupperThreads;
 
