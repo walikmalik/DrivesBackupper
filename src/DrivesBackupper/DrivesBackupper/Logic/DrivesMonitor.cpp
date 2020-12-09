@@ -1,6 +1,8 @@
 #include "DrivesMonitor.h"
 #include "Backupper.h"
 
+#define DEBUG
+
 
 DrivesMonitor::DrivesMonitor()
 {
@@ -24,9 +26,19 @@ void DrivesMonitor::execute()
 		DWORD ldSize = readDrives();
 
 		if (this->newDrives.find_first_not_of(this->existingDrives) != this->newDrives.npos)
-			runBackupper(returnNewElement(ldSize));
+		{
+#ifdef DEBUG
+			std::cout << "New drive detected.\n";
+#endif // DEBUG
+			runBackupper(returnNewElement());
+		}
 		else if (this->existingDrives.find_first_not_of(this->newDrives) != this->newDrives.npos)
-			this->existingDrives = this->newDrives;
+		{
+#ifdef DEBUG
+			std::cout << "Drive disconnected.\n";
+#endif // DEBUG
+			stopBackupper(returnLackElement());
+		}
 	}
 }
 
@@ -49,7 +61,7 @@ DWORD DrivesMonitor::readDrives()
 	return size;
 }
 
-TCHAR DrivesMonitor::returnNewElement(DWORD size)
+TCHAR DrivesMonitor::returnNewElement()
 {
 	TCHAR driveMark = this->newDrives[this->newDrives.find_first_not_of(this->existingDrives)];
 
@@ -62,6 +74,33 @@ TCHAR DrivesMonitor::returnNewElement(DWORD size)
 	return (TCHAR)"";
 }
 
+TCHAR DrivesMonitor::returnLackElement()
+{
+	TCHAR driveMark = this->existingDrives[this->existingDrives.find_first_not_of(this->newDrives)];
+
+	if (driveMark != this->newDrives.npos)
+	{
+		this->existingDrives = this->newDrives;
+		return driveMark;
+	}
+
+	return (TCHAR)"";
+}
+
 void DrivesMonitor::runBackupper(TCHAR driveMark)
 {
+	shared_ptr<Backupper> currentPtr = shared_ptr<Backupper>(new Backupper());
+//	backupperInstances.push_back(currentPtr);
+//	backupperThreads.push_back(thread(&Backupper::execute, ref(*currentPtr), driveMark));
+
+	backupperInstances.insert(pair<TCHAR, shared_ptr<Backupper>>(driveMark, currentPtr));
+	backupperThreads.insert(pair<TCHAR, thread>(driveMark, thread(&Backupper::execute, ref(*currentPtr), driveMark)));
+}
+
+void DrivesMonitor::stopBackupper(TCHAR driveMark)
+{
+	backupperThreads.at(driveMark).detach();
+	backupperThreads.erase(backupperThreads.find(driveMark));
+
+	backupperInstances.erase(backupperInstances.find(driveMark));
 }

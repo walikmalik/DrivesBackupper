@@ -1,1 +1,5 @@
-﻿
+﻿  DrivesMonitor.cpp
+c:\repositories\drivesbackupper\src\drivesbackupper\drivesbackupper\logic\drivesmonitor.cpp(52): warning C4018: '<': signed/unsigned mismatch
+c:\repositories\drivesbackupper\src\drivesbackupper\drivesbackupper\logic\drivesmonitor.cpp(74): warning C4302: 'type cast': truncation from 'const char *' to 'TCHAR'
+c:\repositories\drivesbackupper\src\drivesbackupper\drivesbackupper\logic\drivesmonitor.cpp(87): warning C4302: 'type cast': truncation from 'const char *' to 'TCHAR'
+  DrivesBackupper.vcxproj -> C:\Repositories\DrivesBackupper\src\DrivesBackupper\Debug\DrivesBackupper.exe
