@@ -14,13 +14,26 @@ Backupper::~Backupper()
 void Backupper::execute(TCHAR driveMark)
 {
 	identify(driveMark);
+	if (ifVolumeConfigExist())
+		this->actions.execute(driveMark);
 }
 
 void Backupper::identify(TCHAR driveMark)
 {
-	GetVolumeInformationA(driveMark + ":\\", NULL, NULL, &volumeSerialNumber, NULL, NULL, NULL, NULL);
+	string drivePath;
+	drivePath += driveMark;
+	drivePath += ":\\";
+
+	GetVolumeInformationA(drivePath.c_str(), NULL, NULL, &volumeSerialNumber, NULL, NULL, NULL, NULL);
 #ifdef DEBUG
 	cout << "\nDrive identified.\nVolume Serial Number: " << volumeSerialNumber << "\n";
 #endif // DEBUG
 
+}
+
+bool Backupper::ifVolumeConfigExist()
+{
+	if (volumeSerialNumber == config.volumeSerialNumber)
+		return true;
+	return false;
 }

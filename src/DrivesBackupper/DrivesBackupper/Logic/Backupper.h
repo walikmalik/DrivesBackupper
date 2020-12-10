@@ -2,6 +2,9 @@
 
 #define DEBUG
 
+#include "../Configuration.h"
+#include "Actions.h"
+
 #include <tchar.h>
 #include <windows.h>
 #include <string>
@@ -20,6 +23,11 @@ private:
 	DWORD volumeSerialNumber;
 
 	void identify(TCHAR driveMark);
+	bool ifVolumeConfigExist();
+
+	Configuration config;
+	Actions actions;
+
 public:
 	Backupper();
 	~Backupper();
