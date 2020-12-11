@@ -10,6 +10,7 @@
 #include <map>
 #include <thread>
 #include <memory>
+#include <processthreadsapi.h>
 
 #ifdef DEBUG
 #include <iostream>

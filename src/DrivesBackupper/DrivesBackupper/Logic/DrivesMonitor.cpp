@@ -17,6 +17,7 @@ void DrivesMonitor::execute()
 	readDrives();
 	this->existingDrives = this->newDrives;
 
+	SetPriorityClass(this, PROCESS_MODE_BACKGROUND_BEGIN);
 	while (true)
 	{
 		//TODO: Low system priority.
@@ -36,6 +37,7 @@ void DrivesMonitor::execute()
 #endif // DEBUG
 			stopBackupper(returnLackElement());
 		}
+		Sleep(5 * 1000);
 	}
 }
 
@@ -98,4 +100,7 @@ void DrivesMonitor::stopBackupper(TCHAR driveMark)
 	backupperThreads.erase(backupperThreads.find(driveMark));
 
 	backupperInstances.erase(backupperInstances.find(driveMark));
+
+	if (backupperThreads.empty())
+		SetPriorityClass(this, PROCESS_MODE_BACKGROUND_BEGIN);
 }

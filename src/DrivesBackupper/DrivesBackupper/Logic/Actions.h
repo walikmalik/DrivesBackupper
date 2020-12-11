@@ -18,11 +18,13 @@ private:
 	set<string> driveFiles;
 	set<string> driveBackuppedFiles;
 
-	bool ifNotEmpty();
+	bool ifNotEmpty(string path);
+	bool ifEmpty(string path);
 	set<string> readFileNames(string path);
 	bool findNewFiles();
 	void copyNewFiles();
 	string catchFileName(string path);
+	void createBackupDirectory(string path);
 public:
 	Actions();
 	~Actions();

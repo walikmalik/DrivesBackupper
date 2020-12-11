@@ -9,6 +9,7 @@
 #include <windows.h>
 #include <string>
 #include <thread>
+#include <processthreadsapi.h>
 
 #ifdef DEBUG
 #include <iostream>

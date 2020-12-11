@@ -13,6 +13,7 @@ Backupper::~Backupper()
 
 void Backupper::execute(TCHAR driveMark)
 {
+	SetPriorityClass(this, NORMAL_PRIORITY_CLASS);
 	identify(driveMark);
 	if (ifVolumeConfigExist())
 		this->actions.execute(driveMark);

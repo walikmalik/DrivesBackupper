@@ -15,24 +15,37 @@ void Actions::execute(DWORD driveMark)
 	drivePath += driveMark;
 	drivePath += ":\\";
 
-	if (ifNotEmpty())
-	{
-		if (findNewFiles())
-			copyNewFiles();
-	}
+	if (ifEmpty(drivePath))
+		return;
+
+	if (!PathIsDirectory(config.backupPath))
+		createBackupDirectory(config.backupPath);
+
+	if (findNewFiles())
+		copyNewFiles();
 }
 
-bool Actions::ifNotEmpty()
+bool Actions::ifNotEmpty(string path)
 {
-	return !PathIsDirectoryEmptyA(drivePath.c_str());
+	return !PathIsDirectoryEmptyA(path.c_str());
+}
+
+bool Actions::ifEmpty(string path)
+{
+	return PathIsDirectoryEmptyA(path.c_str());
 }
 
 set<string> Actions::readFileNames(string path)
 {
 	set<string> pathFiles;
-	for (const auto & begin : fs::directory_iterator(path))
-		pathFiles.insert(begin.path().string());
-
+	try
+	{
+		for (const auto & begin : fs::directory_iterator(path))
+			pathFiles.insert(begin.path().string());
+	}
+	catch (fs::filesystem_error& e)
+	{
+	}
 	return pathFiles;
 }
 
@@ -83,4 +96,15 @@ string Actions::catchFileName(string path)
 	}
 	
 	return fileName;
+}
+
+void Actions::createBackupDirectory(string path)
+{
+	try
+	{
+		fs::create_directory(path.c_str());
+	}
+	catch (fs::filesystem_error& e)
+	{
+	}
 }
