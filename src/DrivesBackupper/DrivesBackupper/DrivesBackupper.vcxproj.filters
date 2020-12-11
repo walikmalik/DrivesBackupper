@@ -40,5 +40,8 @@
     <ClInclude Include="Logic\Actions.h">
       <Filter>Logic\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Configuration.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
