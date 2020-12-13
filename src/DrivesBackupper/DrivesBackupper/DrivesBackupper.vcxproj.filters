@@ -15,6 +15,15 @@
     <Filter Include="Logic\Source Files">
       <UniqueIdentifier>{43050eac-4787-48aa-aecf-daa6f8356242}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{2efb81df-3e78-4836-a8a5-78833cebef39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\Header Files">
+      <UniqueIdentifier>{fe311570-09a9-475a-802e-8bc5a0672688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\Source Files">
+      <UniqueIdentifier>{adbed4ee-336c-476d-bd10-ddf50e72bb55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -29,6 +38,9 @@
     <ClCompile Include="Logic\Actions.cpp">
       <Filter>Logic\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Interface\DriveInstaller.cpp">
+      <Filter>Interface\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logic\DrivesMonitor.h">
@@ -42,6 +54,9 @@
     </ClInclude>
     <ClInclude Include="Configuration.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\DriveInstaller.h">
+      <Filter>Interface\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
