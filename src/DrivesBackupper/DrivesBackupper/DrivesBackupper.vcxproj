@@ -104,6 +104,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalOptions>/ENTRY:"mainCRTStartup" %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -121,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Interface\DriveInstaller.cpp" />
     <ClCompile Include="Logic\Actions.cpp" />
     <ClCompile Include="Logic\Backupper.cpp" />
     <ClCompile Include="Logic\DrivesMonitor.cpp" />
@@ -128,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Configuration.h" />
+    <ClInclude Include="Interface\DriveInstaller.h" />
     <ClInclude Include="Logic\Actions.h" />
     <ClInclude Include="Logic\Backupper.h" />
     <ClInclude Include="Logic\DrivesMonitor.h" />

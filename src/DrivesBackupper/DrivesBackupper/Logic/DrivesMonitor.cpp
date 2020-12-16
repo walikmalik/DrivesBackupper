@@ -37,7 +37,11 @@ void DrivesMonitor::execute()
 #endif // DEBUG
 			stopBackupper(returnLackElement());
 		}
-		Sleep(5 * 1000);
+		else
+		{
+			Sleep(3 * 1000);
+			checkBackuppersStatus();
+		}
 	}
 }
 
@@ -88,6 +92,9 @@ TCHAR DrivesMonitor::returnLackElement()
 
 void DrivesMonitor::runBackupper(TCHAR driveMark)
 {
+	if (doNotAskAgainDrives.find(driveMark) != doNotAskAgainDrives.end())
+		return;
+
 	shared_ptr<Backupper> currentPtr = shared_ptr<Backupper>(new Backupper());
 
 	backupperInstances.insert(pair<TCHAR, shared_ptr<Backupper>>(driveMark, currentPtr));
@@ -96,11 +103,29 @@ void DrivesMonitor::runBackupper(TCHAR driveMark)
 
 void DrivesMonitor::stopBackupper(TCHAR driveMark)
 {
-	backupperThreads.at(driveMark).detach();
-	backupperThreads.erase(backupperThreads.find(driveMark));
+	if (backupperThreads.find(driveMark) != backupperThreads.end())
+	{
+		backupperThreads.at(driveMark).detach();
+		backupperThreads.erase(backupperThreads.find(driveMark));
+	}
 
-	backupperInstances.erase(backupperInstances.find(driveMark));
+	if( backupperInstances.find(driveMark) != backupperInstances.end())
+		backupperInstances.erase(backupperInstances.find(driveMark));
 
 	if (backupperThreads.empty())
 		SetPriorityClass(this, PROCESS_MODE_BACKGROUND_BEGIN);
+}
+
+void DrivesMonitor::checkBackuppersStatus()
+{
+	for (auto &i : backupperInstances)
+	{
+		if (i.second->finished)
+		{
+			if (i.second->doNotAskAgainDrives)
+				doNotAskAgainDrives.insert(i.first);
+
+			stopBackupper(i.first);
+		}
+	}
 }

@@ -37,3 +37,6 @@ src/DrivesBackupper/.vs/DrivesBackupper/v15/ipch/AutoPCH/3c6e704ed6a5619d/BACKUP
 src/DrivesBackupper/.vs/DrivesBackupper/v15/ipch/AutoPCH/3c6e704ed6a5619d/BACKUPPER.ipch
 src/DrivesBackupper/.vs/DrivesBackupper/v15/ipch/AutoPCH/93fe432811c4255f/DRIVESMONITOR.ipch
 src/DrivesBackupper/.vs/DrivesBackupper/v15/ipch/AutoPCH/f40b819d21c2b87d/MAIN.ipch
+*.ipch
+src/DrivesBackupper/.vs/DrivesBackupper/v15/ipch/AutoPCH/93fe432811c4255f/DRIVESMONITOR.ipch
+src/DrivesBackupper/.vs/DrivesBackupper/v15/ipch/AutoPCH/3c6e704ed6a5619d/BACKUPPER.ipch
