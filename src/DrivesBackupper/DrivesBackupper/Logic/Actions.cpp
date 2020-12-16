@@ -10,27 +10,29 @@ Actions::~Actions()
 {
 }
 
-void Actions::execute(DWORD driveMark)
+void Actions::execute(DWORD driveMark, Configuration config)
 {
+	this->config = config;
+
 	drivePath += driveMark;
 	drivePath += ":\\";
 
-	if (ifEmpty(drivePath))
+	if (ifDirectoryEmpty(drivePath))
 		return;
 
-	if (!PathIsDirectory(config.backupPath))
+	if (!PathIsDirectory(config.backupPath.c_str()))
 		createBackupDirectory(config.backupPath);
 
 	if (findNewFiles())
 		copyNewFiles();
 }
 
-bool Actions::ifNotEmpty(string path)
+bool Actions::ifDirectoryExist(string path)
 {
 	return !PathIsDirectoryEmptyA(path.c_str());
 }
 
-bool Actions::ifEmpty(string path)
+bool Actions::ifDirectoryEmpty(string path)
 {
 	return PathIsDirectoryEmptyA(path.c_str());
 }

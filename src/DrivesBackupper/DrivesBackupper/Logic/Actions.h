@@ -18,8 +18,8 @@ private:
 	set<string> driveFiles;
 	set<string> driveBackuppedFiles;
 
-	bool ifNotEmpty(string path);
-	bool ifEmpty(string path);
+	bool ifDirectoryExist(string path);
+	bool ifDirectoryEmpty(string path);
 	set<string> readFileNames(string path);
 	bool findNewFiles();
 	void copyNewFiles();
@@ -29,6 +29,6 @@ public:
 	Actions();
 	~Actions();
 
-	void execute(DWORD driveMark);
+	void execute(DWORD driveMark, Configuration config);
 };
 

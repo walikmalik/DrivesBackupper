@@ -12,9 +12,11 @@
 #include <tchar.h>
 #include <windows.h>
 #include <string>
+#include <sstream>
 #include <thread>
 #include <processthreadsapi.h>
 #include <WinUser.h>
+//#include <set>
 
 #ifdef DEBUG
 #include <iostream>
@@ -27,12 +29,14 @@ class Backupper
 {
 private:
 	DWORD volumeSerialNumber;
-	int messageBoxAnswer;
+	set <Configuration> installedDrives;
 
 	void identify(TCHAR driveMark);
-	bool ifVolumeConfigExist();
-	bool showInstallingMessage(TCHAR driveMark);
+	set<Configuration>::iterator VolumeConfig();
+	int showInstallingMessage(TCHAR driveMark);
 	void runNewDriveInstaller();
+	void readConfigFile();
+	string getUserName();
 
 	Configuration config;
 	Actions actions;

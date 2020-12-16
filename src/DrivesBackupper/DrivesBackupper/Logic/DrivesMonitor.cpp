@@ -96,10 +96,14 @@ void DrivesMonitor::runBackupper(TCHAR driveMark)
 
 void DrivesMonitor::stopBackupper(TCHAR driveMark)
 {
-	backupperThreads.at(driveMark).detach();
-	backupperThreads.erase(backupperThreads.find(driveMark));
+	if (backupperThreads.find(driveMark) != backupperThreads.end())
+	{
+		backupperThreads.at(driveMark).detach();
+		backupperThreads.erase(backupperThreads.find(driveMark));
+	}
 
-	backupperInstances.erase(backupperInstances.find(driveMark));
+	if( backupperInstances.find(driveMark) != backupperInstances.end())
+		backupperInstances.erase(backupperInstances.find(driveMark));
 
 	if (backupperThreads.empty())
 		SetPriorityClass(this, PROCESS_MODE_BACKGROUND_BEGIN);

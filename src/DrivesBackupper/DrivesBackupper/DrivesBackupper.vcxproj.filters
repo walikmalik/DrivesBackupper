@@ -52,11 +52,11 @@
     <ClInclude Include="Logic\Actions.h">
       <Filter>Logic\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Configuration.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Interface\DriveInstaller.h">
       <Filter>Interface\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration.h">
+      <Filter>Logic\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
