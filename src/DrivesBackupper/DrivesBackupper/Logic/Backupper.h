@@ -16,7 +16,6 @@
 #include <thread>
 #include <processthreadsapi.h>
 #include <WinUser.h>
-//#include <set>
 
 #ifdef DEBUG
 #include <iostream>

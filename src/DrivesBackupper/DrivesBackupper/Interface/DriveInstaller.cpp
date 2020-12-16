@@ -121,6 +121,7 @@ DriveInstaller::DriveInstaller()
 
 DriveInstaller::~DriveInstaller()
 {
+	CloseHandle(configFile);
 }
 
 void DriveInstaller::Execute(DWORD volumeSerialNumber)
