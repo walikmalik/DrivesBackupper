@@ -43,6 +43,9 @@ private:
 	DriveInstaller driveInstaller;
 
 public:
+	bool doNotAskAgainDrives;
+	bool finished;
+
 	Backupper();
 	~Backupper();
 

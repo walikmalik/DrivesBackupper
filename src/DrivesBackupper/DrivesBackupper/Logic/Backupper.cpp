@@ -13,6 +13,8 @@ Backupper::~Backupper()
 
 void Backupper::execute(TCHAR driveMark)
 {
+	finished = false;
+
 	SetPriorityClass(this, NORMAL_PRIORITY_CLASS);
 	identify(driveMark);
 	readConfigFile();
@@ -33,10 +35,15 @@ void Backupper::execute(TCHAR driveMark)
 			runNewDriveInstaller();
 			execute(driveMark);
 			break;
+		case 7:
+			doNotAskAgainDrives = true;
+			break;
 		default:
+			doNotAskAgainDrives = false;
 			break;
 		}
 	}
+	finished = true;
 }
 
 void Backupper::identify(TCHAR driveMark)

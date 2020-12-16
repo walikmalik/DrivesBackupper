@@ -6,7 +6,7 @@
 
 #include <windows.h>
 #include <string>
-#include <vector>
+#include <set>
 #include <map>
 #include <thread>
 #include <memory>
@@ -26,6 +26,7 @@ class DrivesMonitor
 private:
 	map <TCHAR, shared_ptr<Backupper>> backupperInstances;
 	map <TCHAR, thread> backupperThreads;
+	set<DWORD> doNotAskAgainDrives;
 
 	string existingDrives;
 	string newDrives;
@@ -35,6 +36,7 @@ private:
 	TCHAR returnLackElement();
 	void runBackupper(TCHAR driveMark);
 	void stopBackupper(TCHAR driveMark);
+	void checkBackuppersStatus();
 
 public:
 	DrivesMonitor();
