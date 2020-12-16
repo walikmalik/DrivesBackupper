@@ -121,6 +121,7 @@ void Backupper::readConfigFile()
 			}
 		}
 	}
+	config.close();
 }
 
 string Backupper::getUserName()
