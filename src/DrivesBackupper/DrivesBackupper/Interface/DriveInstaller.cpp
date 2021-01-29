@@ -60,6 +60,8 @@ void DriveInstaller::getBackupPath()
 	if (!AllocConsole())
 		return;
 
+	showMessage("dupa", "dupa2");
+
 	char userAnswer[MAX_PATH_LENGTH];
 
 	freopen_s((FILE**)stdout, "CONOUT$", "w", stdout);
@@ -94,6 +96,12 @@ void DriveInstaller::getBackupPath()
 	{
 		//FIXME: Console don't close.
 	}
+}
+
+PIDLIST_ABSOLUTE DriveInstaller::showMessage(string title, string message)
+{
+	LPBROWSEINFO info;
+	return SHBrowseForFolderA(info);
 }
 
 string DriveInstaller::generateDefaultPath(string suffix)

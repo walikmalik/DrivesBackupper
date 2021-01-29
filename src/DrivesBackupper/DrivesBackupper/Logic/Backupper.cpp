@@ -75,7 +75,7 @@ int Backupper::showInstallingMessage(TCHAR driveMark)
 	message += driveMark;
 	message += MESSAGE_INSTALL_TEXT;
 
-	return MessageBox(NULL, message.c_str(), "New drive.", MB_YESNOCANCEL | MB_ICONEXCLAMATION);	
+	return MessageBox(NULL, message.c_str(), "DrivesBackupper.", MB_YESNOCANCEL | MB_ICONEXCLAMATION);	
 }
 
 void Backupper::runNewDriveInstaller()

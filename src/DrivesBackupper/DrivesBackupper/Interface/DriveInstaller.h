@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <Shlobj.h>
 
 using namespace std;
 class DriveInstaller
@@ -26,6 +27,7 @@ public:
 	void addDriveToConfig();
 	void getDefaultPath();
 	void getBackupPath();	//If false use default options.
+	PIDLIST_ABSOLUTE showMessage(string title, string message);
 	string generateDefaultPath(string suffix);
 public:
 	DriveInstaller();

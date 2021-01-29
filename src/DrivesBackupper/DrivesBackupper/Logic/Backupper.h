@@ -3,7 +3,7 @@
 #undef DEBUG
 
 #define MESSAGE_LENGTH 320
-#define MESSAGE_INSTALL_TEXT ": are not installed in DrivesBackupper.\n Do you want do this now?"
+#define MESSAGE_INSTALL_TEXT " not added to Drives Backuper.\n Do you want do this now?"
 
 #include "../Configuration.h"
 #include "Actions.h"
